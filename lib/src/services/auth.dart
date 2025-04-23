@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 class FakeService extends GetxService {
   final Dio _dio = Dio();
   // var isAdmin = false.obs;
-    var errormessage = false.obs;
-
+  var errormessage = false.obs;
 
   Future authenticate(String username, String password) async {
     final url = Uri.parse('http://127.0.0.1:8080/user');
@@ -17,12 +16,12 @@ class FakeService extends GetxService {
     var data = jsonDecode(a.body);
     // Simulate API call delay
     await Future.delayed(Duration(seconds: 0));
-    // print(data);
+    print(data);
     for (var i = 0; i < data.length; i++) {
       if (username == data[i]['username'] && password == data[i]['password']) {
         GetStorage box = GetStorage();
         box.write('login', true);
-        
+
         // print('Login Successfully');
         return true;
       }
@@ -35,7 +34,7 @@ class FakeService extends GetxService {
       //   return false;
       // }
       else {
-       errormessage.value = true;
+        errormessage.value = true;
         print('Invalid Credantials');
       }
 //  else {
